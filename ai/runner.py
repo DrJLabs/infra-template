@@ -10,7 +10,7 @@ async def main(ticket: str = "demo") -> None:
     coder    = AssistantAgent("coder",    llm, description="Write code")
     reviewer = AssistantAgent("reviewer", llm, description="Review code")
     team = RoundRobinGroupChat([planner, coder, reviewer], max_turns=4)
-    await team.run(task=f"Ticket {ticket}: print hello world and stop")
+    history = await team.run(task=f"Ticket {ticket}: print hello world and stop")
     for m in history:
         print(f"[{m.author}] {m.content}")
 
