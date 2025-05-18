@@ -5,4 +5,4 @@ requests
 fastapi
 uvicorn[standard]
 pydantic
-pyautogen==0.8.8
+ag2[openai]>=0.9
