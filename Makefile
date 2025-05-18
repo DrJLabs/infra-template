@@ -14,7 +14,7 @@ $(VENV_PY):
 	$(PIP) install --upgrade pip
 
 # -------- PHONY TARGETS --------
-.PHONY: install-dev install-test lint type sec test check agent \ agent
+.PHONY: install-dev install-test lint type sec test check agent \
         up down logs grafana
 
 # -------- INSTALL --------
@@ -35,21 +35,21 @@ test:  $(VENV_PY) ; $(PYTEST) -q tests
 check: lint type sec test                ## all gates
 
 # -------- AGENT ORCHESTRATOR --------
-aagent: $(VENV_PY)                ## run AutoGen GroupChat
-	@if [ -f .env ]; then \
-		set -a; . .env; set +a; \
+agent: $(VENV_PY)                       ## run AutoGen GroupChat
+	@if [ -f $(CURDIR)/.env ]; then \
+		set -a; . $(CURDIR)/.env; set +a; \
 	fi; \
 	$(VENV_PY) ai/runner.py $(TICKET)
 
 # -------- DOCKER OBSERVABILITY STACK --------
-up:                                    ## start full stack incl. OTLP
+up:                                     ## start full stack incl. OTLP
 	docker compose up -d
 
-down:                                  ## stop all containers
+down:                                   ## stop all containers
 	docker compose down
 
-logs:                                  ## tail compose logs
+logs:                                   ## tail compose logs
 	docker compose logs -f --tail=50
 
-grafana:                               ## quick link to Grafana UI
-	@echo "Open http://localhost:3000 (user: admin / pass: admin)"
+grafana:                                ## quick link to Grafana UI
+	@echo "Open http://localhost:3000  (user: admin  pass: admin)"
