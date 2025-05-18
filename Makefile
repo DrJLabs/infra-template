@@ -31,5 +31,6 @@ sec:   $(VENV_PY) ; $(BANDIT) -r src -q
 test:  $(VENV_PY) ; $(PYTEST) -q tests
 check: lint type sec test
 
-agent-run: $(VENV_PY)
+agent:
+	.venv/bin/python ai/runner.py $(TICKET)
 	$(VENV_PY) ai/$(AGENT).py --ticket $(TICKET)
