@@ -1,0 +1,4 @@
+resources:
+  cpu: 4
+  memory: 8GiB
+timeout: 25m

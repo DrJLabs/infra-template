@@ -1,0 +1,3 @@
+# Obsidian / Copilot indexes (too large for Git)
+vault/.copilot-index/
+vault/.obsidian/copilot-index-*.json
