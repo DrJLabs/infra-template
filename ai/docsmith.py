@@ -1,4 +1,5 @@
-from autogen import AssistantAgent, pathlib
+from autogen import AssistantAgent
+import pathlib
 
 class DocSmith(AssistantAgent):
     role = "docsmith"
