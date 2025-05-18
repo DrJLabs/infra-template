@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 echo "🔍  Running quality gates before push..."
-make check || { echo "❌  Push blocked: quality gates failed"; exit 1; }
+
+# ensure venv exists + deps
+make install-dev >/dev/null
+
+# run full gate suite
+make check || { echo '❌  Push blocked: quality gates failed'; exit 1; }

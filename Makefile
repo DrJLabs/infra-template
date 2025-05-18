@@ -1,42 +1,35 @@
-# -------- PHONY targets --------
+# -------- CONFIG --------
+VENV_DIR := .venv
+VENV_PY  := $(VENV_DIR)/bin/python
+PIP      := $(VENV_DIR)/bin/pip
+RUFF     := $(VENV_DIR)/bin/ruff
+BLACK    := $(VENV_DIR)/bin/black
+MYPY     := $(VENV_DIR)/bin/mypy
+BANDIT   := $(VENV_DIR)/bin/bandit
+PYTEST   := $(VENV_DIR)/bin/pytest
+
+# -------- INTERNAL --------
+$(VENV_PY):
+	python3 -m venv $(VENV_DIR)
+	$(PIP) install --upgrade pip
+
+# -------- PHONY TARGETS --------
 .PHONY: install-dev install-test check lint type sec test agent-run
 
-# ---------- TOOL VERSIONS ----------
-PY        ?= python3.12
-PIP       ?= python3.12 -m pip
-RUFF      ?= ruff
-BLACK     ?= black
-MYPY      ?= mypy
-BANDIT    ?= bandit
-PYTEST    ?= pytest
-
-# ---------- INSTALL ----------
-install-dev:               ## install dev + lint/type/sec tooling
-	$(PIP) install --upgrade pip
+install-dev: $(VENV_PY)
 	$(PIP) install -r requirements-test.txt
 	$(PIP) install -e .
 	$(PIP) install ruff black mypy bandit
 
-install-test:              ## install only test deps
-	$(PIP) install --upgrade pip
+install-test: $(VENV_PY)
 	$(PIP) install -r requirements-test.txt
 	$(PIP) install -e .
 
-# ---------- QUALITY GATES ----------
-lint:                      ## ruff = fast lint & format check
-	$(RUFF) check .
+lint:  $(VENV_PY) ; $(RUFF)   check .
+type:  $(VENV_PY) ; $(MYPY)   src
+sec:   $(VENV_PY) ; $(BANDIT) -r src -q
+test:  $(VENV_PY) ; $(PYTEST) -q tests
+check: lint type sec test
 
-type:                      ## mypy static typing
-	$(MYPY) src
-
-sec:                       ## bandit security scan
-	$(BANDIT) -r src -q
-
-test:                      ## run pytest with quiet output
-	$(PYTEST) -q tests
-
-check: lint type sec test  ## run all gates
-
-# ---------- AGENT ----------
-agent-run:                 ## run an agent (e.g. make agent-run AGENT=coder TICKET=42)
-	$(PY) ai/$(AGENT).py --ticket $(TICKET)
+agent-run: $(VENV_PY)
+	$(VENV_PY) ai/$(AGENT).py --ticket $(TICKET)
