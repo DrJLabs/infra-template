@@ -1,11 +1,8 @@
+# .github/workflows/ci.yml
 name: CI
-
 on:
-  push:
-    branches: [main]
+  push:       {branches: [main]}
   pull_request:
-    branches: [main]
-
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -18,12 +15,14 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install deps                       # <— NEW
+      - name: Install deps
+        working-directory: infra-template      # 👈 NEW
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements-test.txt
           pip install -e .
 
       - name: Run pytest
+        working-directory: infra-template      # 👈 NEW
         run: |
           pytest -q tests
