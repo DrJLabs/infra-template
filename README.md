@@ -15,3 +15,14 @@ Agents **must not** add real secrets or artefacts; update the examples instead.
 ## Offline setup
 
 Run `scripts/setup.sh` to create a virtual environment. If `vendor/wheels` contains wheel files, they will be installed without network access. When the directory is empty the script simply creates the environment and relies on the packages preloaded in this workspace.
+
+## Agent guidance
+
+Instructions for automated agents live in `.codex/AGENTS.md`. They supersede any
+other documentation. Review them before running automation.
+
+A startup script is available at `.codex/startup.sh` for preparing the Python
+environment using only the wheels provided in `vendor/wheels`. If no wheels are
+present, the script skips installation to avoid network access. Run it before
+the environment loses connectivity.
+
