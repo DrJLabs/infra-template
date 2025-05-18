@@ -53,3 +53,6 @@ logs:                                   ## tail compose logs
 
 grafana:                                ## quick link to Grafana UI
 	@echo "Open http://localhost:3000  (user: admin  pass: admin)"
+	
+prune:
+	git remote prune origin && git branch --merged main | grep -v '^\*' | xargs -r git branch -d

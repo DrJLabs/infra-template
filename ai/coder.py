@@ -1,4 +1,4 @@
-from autogen import AssistantAgent
+from autogen_agentchat.agents import AssistantAgent
 
 class Coder(AssistantAgent):
     role = "coder"
