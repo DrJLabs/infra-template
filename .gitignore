@@ -1,3 +1,11 @@
 # Obsidian / Copilot indexes (too large for Git)
 vault/.copilot-index/
 vault/.obsidian/copilot-index-*.json
+
+# --- local secrets & environments ---
+.env
+.venv/
+
+# --- Python build artefacts ---
+*.egg-info/
+__pycache__/
