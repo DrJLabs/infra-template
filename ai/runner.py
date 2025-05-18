@@ -1,14 +1,11 @@
-import asyncio
-import os
-from autogen import GroupChat, setup_openai
-
+import asyncio, os
+from ag2 import GroupChat
 from planner import Planner
 from coder   import Coder
 from tester  import Tester
 from reviewer import Reviewer
 from docsmith import DocSmith
 
-setup_openai(api_key=os.getenv("OPENAI_API_KEY"))
 
 async def main(ticket: str):
     chat = GroupChat(
