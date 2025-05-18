@@ -35,8 +35,10 @@ test:  $(VENV_PY) ; $(PYTEST) -q tests
 check: lint type sec test                ## all gates
 
 # -------- AGENT ORCHESTRATOR --------
-agent: $(VENV_PY)                        ## run AutoGen GroupChat
-	@set -a; test -f .env && . .env; set +a; \
+aagent: $(VENV_PY)                ## run AutoGen GroupChat
+	@if [ -f .env ]; then \
+		set -a; . .env; set +a; \
+	fi; \
 	$(VENV_PY) ai/runner.py $(TICKET)
 
 # -------- DOCKER OBSERVABILITY STACK --------
