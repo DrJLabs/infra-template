@@ -14,7 +14,7 @@ $(VENV_PY):
 	$(PIP) install --upgrade pip
 
 # -------- PHONY TARGETS --------
-.PHONY: install-dev install-test lint type sec test check agent \
+.PHONY: install-dev install-test lint type sec test check agent \ agent
         up down logs grafana
 
 # -------- INSTALL --------
