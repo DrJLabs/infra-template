@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "🔍  Running quality gates before push..."
+make check || { echo "❌  Push blocked: quality gates failed"; exit 1; }
