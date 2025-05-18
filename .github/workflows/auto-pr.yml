@@ -1,0 +1,21 @@
+name: ci               # status-check name the rule will require
+on:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  ci:                  # <-- job id = check name
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+
+      - run: make install-dev
+      - run: make check
+
+      # open or update PR + label + enable auto-merge
