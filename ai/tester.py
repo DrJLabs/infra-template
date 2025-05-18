@@ -1,6 +1,5 @@
 import subprocess
 from autogen_agentchat.agents import AssistantAgent
-import subprocess                # ← NOW at top, before class definition
 
 class Tester(AssistantAgent):
     role = "tester"
