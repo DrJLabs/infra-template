@@ -1,4 +1,4 @@
-from autogen import AssistantAgent
+from autogen_agentchat.agents import AssistantAgent
 import pathlib
 
 class DocSmith(AssistantAgent):

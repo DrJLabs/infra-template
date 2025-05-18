@@ -9,3 +9,8 @@ vault/.obsidian/copilot-index-*.json
 # --- Python build artefacts ---
 *.egg-info/
 __pycache__/
+
+# --- allow tracked placeholders ---
+!.venv/.gitkeep
+!stub.egg-info/
+!src/__pycache__/README.md

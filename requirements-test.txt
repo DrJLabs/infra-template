@@ -5,4 +5,5 @@ requests
 fastapi
 uvicorn[standard]
 pydantic
-ag2[openai]>=0.9
+autogen-agentchat==0.5.7
+autogen-ext[openai]==0.5.7
