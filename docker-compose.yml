@@ -185,3 +185,7 @@ services:
         limits:
           cpus: '0.50'
           memory: 512m
+
+# ---- Observability stack ----
+include:
+  - ./ops/docker/otel.yml
