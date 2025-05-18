@@ -1,6 +1,6 @@
 import asyncio
 
-from ag2 import GroupChat
+from autogen import GroupChat, ConversableAgent
 from coder import Coder
 from docsmith import DocSmith
 from planner import Planner
