@@ -7,7 +7,6 @@ from planner import Planner
 from reviewer import Reviewer
 from tester import Tester
 
-
 async def main(ticket: str):
     chat = GroupChat(
         agents=[Planner(), Coder(), Tester(), Reviewer(), DocSmith()],

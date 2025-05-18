@@ -1,4 +1,4 @@
-from autogen import AssistantAgent, subprocess
+from autogen import AssistantAgent
 
 class Tester(AssistantAgent):
     role = "tester"
