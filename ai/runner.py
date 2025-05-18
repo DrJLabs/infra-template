@@ -1,19 +1,18 @@
+# ai/runner.py  (replace existing file)
 import asyncio
+from autogen_agentchat.agents import AssistantAgent
+from autogen_agentchat.teams import RoundRobinGroupChat
+from autogen_ext.models.openai import OpenAIChatCompletionClient
 
-from autogen import GroupChat
-from coder import Coder
-from docsmith import DocSmith
-from planner import Planner
-from reviewer import Reviewer
-from tester import Tester
-
-async def main(ticket: str):
-    chat = GroupChat(
-        agents=[Planner(), Coder(), Tester(), Reviewer(), DocSmith()],
-        messages=[f"### Ticket {ticket}: See backlog.md"]
-    )
-    await chat.run()
+async def main(ticket: str = "demo") -> None:
+    llm = OpenAIChatCompletionClient(model="gpt-4o")  # reads OPENAI_API_KEY
+    planner  = AssistantAgent("planner",  llm, description="Break task")
+    coder    = AssistantAgent("coder",    llm, description="Write code")
+    reviewer = AssistantAgent("reviewer", llm, description="Review code")
+    team = RoundRobinGroupChat([planner, coder, reviewer], max_turns=4)
+    await team.run(task=f"Ticket {ticket}: print hello world and stop")
+    for m in history:
+        print(f"[{m.author}] {m.content}")
 
 if __name__ == "__main__":
-    import sys
-    asyncio.run(main(sys.argv[1] if len(sys.argv) > 1 else "0"))
+    asyncio.run(main())
