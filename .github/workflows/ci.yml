@@ -1,29 +1,25 @@
-# .github/workflows/ci.yml
-name: CI
+name: ci
+
 on:
-  push:       { branches: [main] }
+  push:
+    branches: [main]
   pull_request:
 
 jobs:
-  tests:
+  ci:                      # <-- job id matches required status check
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          path: .            # 👈 clone directly into $GITHUB_WORKSPACE
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements-test.txt
-          pip install -e .
+      - name: Install developer dependencies
+        run: make install-dev
 
-      - name: Run pytest
-        run: |
-          pytest -q tests
+      - name: Run quality gates (ruff, mypy, bandit, pytest)
+        run: make check
