@@ -19,16 +19,3 @@ jobs:
       - run: make check
 
       # open or update PR + label + enable auto-merge
-      - name: Create / update PR
-        id: cpr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          title: ${{ github.ref_name }}
-          body: "Auto-generated PR from branch `${{ github.ref_name }}`"
-          branch: ${{ github.ref_name }}
-          labels: automerge
-          draft: false
-
-      - name: Enable auto-merge
-        if: steps.cpr.outputs.pull-request-number != ''
-        run: gh pr merge ${{ steps.cpr.outputs.pull-request-number }} --auto --merge
