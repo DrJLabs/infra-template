@@ -1,4 +1,4 @@
-from autogen import AssistantAgent, context
+from autogen import AssistantAgent
 
 class Planner(AssistantAgent):
     role = "planner"

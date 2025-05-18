@@ -1,4 +1,5 @@
-import asyncio, os
+import asyncio
+import os
 from autogen import GroupChat, setup_openai
 
 from planner import Planner
