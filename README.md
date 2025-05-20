@@ -21,8 +21,7 @@ Run `scripts/setup.sh` to create a virtual environment. If `vendor/wheels` conta
 Instructions for automated agents live in `.codex/AGENTS.md`. They supersede any
 other documentation. Review them before running automation.
 
-A startup script is available at `.codex/startup.sh` for preparing the Python
-environment using only the wheels provided in `vendor/wheels`. If no wheels are
-present, the script skips installation to avoid network access. Run it before
-the environment loses connectivity.
+Use `scripts/setup.sh` to prepare the Python environment. The script installs
+any wheels found in `vendor/wheels` without requiring network access and is the
+only setup method expected by automated tools.
 
