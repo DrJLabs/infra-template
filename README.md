@@ -26,3 +26,11 @@ environment using only the wheels provided in `vendor/wheels`. If no wheels are
 present, the script skips installation to avoid network access. Run it before
 the environment loses connectivity.
 
+## Montfort integration
+
+Set `DISABLE_MONTFORT=1` to force the application to load a stub client and skip tests marked with `@pytest.mark.montfort`. To run the real integration tests, unset the variable and include the marker:
+
+```bash
+pytest -m montfort
+```
+
